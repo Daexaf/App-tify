@@ -1,25 +1,23 @@
 import logo from "./logo.svg";
 import "./App.css";
 import data from "./data.js";
+import  IsiTrack  from "./components/track/index";
+import ButtonTrack from "./components/track/button/index";
 
 function App() {
   return (
     <main>
       <h1>Create Playlist</h1>
-
       <div class="deskripsi">
-        <div class="logo">
-          <img src={data.album.images[1].url} alt="" />
+      
+      <IsiTrack 
+        images={data.album.images[1].url}
+        title={data.name}
+        artist={data.artists[0].name}
+        album={data.album.name}
+        />
+        <ButtonTrack />
         </div>
-        <div class="desc-content">
-          <h3>Title: {data.name}</h3>
-          <p>Artist: {data.album.artists[0].name}</p>
-          <p>Albums: {data.album.name}</p>
-          <button type="submit" id="play">
-            Select
-          </button>
-        </div>
-      </div>
     </main>
   );
 }
