@@ -1,23 +1,30 @@
-import logo from "./logo.svg";
+// import logo from "./logo.svg";
 import "./App.css";
 import data from "./data.js";
-import  IsiTrack  from "./components/track/index";
-import ButtonTrack from "./components/track/button/index";
+import IsiTrack from "./components/track/index";
+// import ButtonTrack from "./components/track/button/index";
 
 function App() {
+  const callMusic = data.map((music) => (
+    <IsiTrack
+      key={music.id}
+      images={music.album.images[1].url}
+      title={music.name}
+      artist={music.artists[0].name}
+      album={music.album.name}
+    />
+  ));
+
   return (
     <main>
       <h1>Create Playlist</h1>
-      <div class="deskripsi">
-      
-      <IsiTrack 
-        images={data.album.images[1].url}
-        title={data.name}
-        artist={data.artists[0].name}
-        album={data.album.name}
-        />
-        <ButtonTrack />
+      <div className="deskripsi">
+        <div className="trackSong">
+          <div className="listSong">
+            {callMusic}
+          </div>
         </div>
+      </div>
     </main>
   );
 }

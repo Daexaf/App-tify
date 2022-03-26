@@ -6,6 +6,8 @@ html {
     rgba(151, 56, 140, 1) 0%,
     rgba(159, 54, 22, 1) 100%
   );
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 p,
@@ -17,28 +19,11 @@ h3 {
 .deskripsi {
   background-color: transparent;
   text-align: center;
-  border: 5px solid black;
-  padding: 10px 20px;
-  margin: 5px;
+  border: 5px solid rgba(216, 197, 192, 0.5);
+  padding: 10px 10px;
+  margin: 0 50px;
 }
 
-/* .form-content input,
-textarea {
-  margin-bottom: 5px;
-  border-radius: 2px;
-  border: 0px solid black;
-  padding: 5px;
-}
-
-.form-content {
-  margin-bottom: 10px;
-}
-
-.form {
-  padding: px;
-  margin-bottom: 10px;
-  margin-left: 10px;
-} */
 
 button {
   width: 200px;
@@ -52,6 +37,33 @@ button {
 
 button:hover {
   background-color: #b4bdc5;
+}
+
+.trackSong{
+  margin: 20px;
+}
+
+.listSong{
+  display: flex;
+  flex-wrap: wrap;
+  width:100%;
+  margin: 0;
+  justify-content: space-around;
+}
+
+.track{
+  width:40%;
+  margin-bottom:20px;
+  padding-top:20px;
+  padding-bottom:10px;
+}
+
+.track:hover{
+  background-color: rgba(196, 179, 179, 0.5);
+}
+
+h1{
+  margin-left: 50px;
 }
 
 @keyframes App-logo-spin {
