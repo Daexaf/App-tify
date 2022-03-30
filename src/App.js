@@ -5,6 +5,7 @@ import IsiTrack from "./components/track/index";
 // import ButtonTrack from "./components/track/button/index";
 import url from "./components/helper/index";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 function App() {
   const [token, setToken] = useState("");
@@ -19,7 +20,8 @@ function App() {
   }, []);
 
   const getSong = async () => {
-    await fetch(
+    await axios
+    .get(
       `https://api.spotify.com/v1/search?q=${cariLagu}&type=track&access_token=${token}`
     )
       .then((response) => {
@@ -45,24 +47,27 @@ function App() {
       <h1>Create Playlist</h1>
       <a
         href={url}
-        className="py-2 px-4 bg-blue-600 rounded text-white font-medium uppercase hover:bg-blue-700 text-xs leading-tight"
+        className="loginan"
       >
         Login
       </a>
+      <div className="inputan">
       <input
         type="search"
-        className="flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal bg-white border border-solid border-gray-300 rounded-l transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+        className="inptSrc"
         placeholder="Search"
         aria-label="Search"
         onChange={(e) => setCariLagu(e.target.value)}
       />
       <button
-        className="px-6 py-2 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-r focus:outline-none focus:ring-0 transition duration-150 ease-in-out hover:bg-blue-700"
+        className="btnInput"
         type="button"
         onClick={getSong}
       >
         Search
       </button>
+      </div>
+      
       <div className="deskripsi">
         <div className="trackSong">
           <div className="listSong">{callMusic}</div>
