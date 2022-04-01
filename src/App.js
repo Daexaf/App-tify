@@ -1,6 +1,6 @@
 // import logo from "./logo.svg";
 import "./App.css";
-import data from "./data.js";
+// import data from "./data.js";
 import IsiTrack from "./components/track/index";
 // import ButtonTrack from "./components/track/button/index";
 import url from "./components/helper/index";
@@ -11,6 +11,8 @@ function App() {
   const [token, setToken] = useState("");
   const [cariLagu, setCariLagu] = useState("");
   const [dataLagu, setdataLagu] = useState([]);
+  const [selectedTracks, setSelectedTracks] = useState([]);
+  const [gabungTracks, SetGabungTracks] = useState([]);
 
   useEffect(() => {
     const queryString = new URL(window.location.href.replace("#", "?"))
@@ -32,13 +34,34 @@ function App() {
       });
   };
 
-  const callMusic = dataLagu.map((music) => (
+  const handleSelectedTrack = (uri) => {
+    const alreadySelected = selectedTracks.find((m) => m.id === uri.id);
+    if (alreadySelected){
+      setSelectedTracks(selectedTracks.filter((m) => m.id !== uri.id));
+    }else{
+      setSelectedTracks([...selectedTracks, uri]);
+    }
+    console.log(selectedTracks)
+  };
+
+  useEffect(() =>{
+    const gabungTracksWithSelectedTrack = dataLagu.map((music) =>({
+      ...music,
+      isSelected: selectedTracks.find((m) => m === m.uri)
+    }));
+    SetGabungTracks(gabungTracksWithSelectedTrack);
+    console.log(gabungTracksWithSelectedTrack);
+  }, [selectedTracks, dataLagu])
+  
+  const callMusic = gabungTracks.map((music) => (
     <IsiTrack
       key={music.id}
       images={music.album.images[1].url}
       title={music.name}
       artist={music.artists[0].name}
       album={music.album.name}
+      onSelectedTrack={handleSelectedTrack}
+      uri={music.uri}
     />
   ));
 
