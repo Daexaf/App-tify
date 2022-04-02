@@ -1,6 +1,6 @@
-import ButtonTrack from "./button/index";
+// import ButtonTrack from "./button/index";
 
-const IsiTrack = ({images, title, artist, album, onSelectTrack, uri, isSelected}) => {
+const IsiTrack = ({images, title, artist, album, onSelectMusic, uri, isSelected}) => {
     return (    
         <div className="track">
             <img src={images} alt="images album" />
@@ -8,7 +8,7 @@ const IsiTrack = ({images, title, artist, album, onSelectTrack, uri, isSelected}
                 <p>Artist: {artist}</p>
                 <p>Albums: {album}</p>
                 {/* <button type="submit" id="play">Select</button> */}
-                <button onClick={() => onSelectTrack(uri)}>{isSelected ? 'Deselect' : 'Select'}</button>
+                <button onClick={() => onSelectMusic(uri)}>{isSelected ? 'Deselect' : 'Select'}</button>
         </div>
 )
 };

@@ -15,8 +15,7 @@ function App() {
   const [gabungTracks, SetGabungTracks] = useState([]);
 
   useEffect(() => {
-    const queryString = new URL(window.location.href.replace("#", "?"))
-      .searchParams;
+    const queryString = new URL(window.location.href.replace("#", "?")).searchParams;
     const accessToken = queryString.get("access_token");
     setToken(accessToken);
   }, []);
@@ -26,44 +25,43 @@ function App() {
     .get(
       `https://api.spotify.com/v1/search?q=${cariLagu}&type=track&access_token=${token}`
     )
-      .then((response) => {
-        setdataLagu(response.data.tracks.items);
-      })
+      .then((response) => setdataLagu(response.data.tracks.items))
       .catch((error) => {
         console.log(error);
-      });
+      });   
   };
 
   const handleSelectedTrack = (uri) => {
-    const alreadySelected = selectedTracks.find((m) => m.id === uri.id);
+    const alreadySelected = selectedTracks.find(m => m === uri);
     if (alreadySelected){
-      setSelectedTracks(selectedTracks.filter((m) => m.id !== uri.id));
+      setSelectedTracks(selectedTracks.filter((m) => m !== uri))
     }else{
       setSelectedTracks([...selectedTracks, uri]);
     }
     console.log(selectedTracks)
-  };
+  }
 
   useEffect(() =>{
-    const gabungTracksWithSelectedTrack = dataLagu.map((music) =>({
-      ...music,
-      isSelected: selectedTracks.find((m) => m === m.uri)
+    const gabungTracksWithSelectedTrack = dataLagu.map((songs) =>({
+      ...songs,
+      isSelected: selectedTracks.find((m) => m === songs.uri) ? true :false,
     }));
     SetGabungTracks(gabungTracksWithSelectedTrack);
-    console.log(gabungTracksWithSelectedTrack);
-  }, [selectedTracks, dataLagu])
+    // console.log(gabungTracksWithSelectedTrack);
+  }, [selectedTracks, dataLagu]);
   
-  const callMusic = gabungTracks.map((music) => (
+  const callMusic = gabungTracks.map((music) => 
     <IsiTrack
       key={music.id}
       images={music.album.images[1].url}
       title={music.name}
       artist={music.artists[0].name}
       album={music.album.name}
-      onSelectedTrack={handleSelectedTrack}
+      onSelectMusic={handleSelectedTrack}
       uri={music.uri}
+      isSelected={music.isSelected}
     />
-  ));
+  );
 
   return (
     <main>
