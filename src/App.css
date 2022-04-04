@@ -85,6 +85,10 @@ h1{
   margin-left: 20px;
 }
 
+form{
+  color:white;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
