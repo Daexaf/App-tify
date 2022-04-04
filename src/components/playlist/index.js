@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const playlistBaru = ({accessToken, userId, uris}) => {
+const PlaylistBaru = ({accessToken, userId, uris}) => {
 	const [form, setForm] = useState({
 		title: '',
 		description: '',
@@ -11,7 +11,7 @@ const playlistBaru = ({accessToken, userId, uris}) => {
 		setForm({...form, [name]: value});
 	}
 
-	const handleCreatePlaylist = async (e) => {
+	const handleplaylistBaru = async (e) => {
 		e.preventDefault();
 
 		if (form.title.length > 5) {
@@ -24,7 +24,7 @@ const playlistBaru = ({accessToken, userId, uris}) => {
 					}
 				}
 
-				const optionsCreatePlaylist = {
+				const optionsplaylistBaru = {
 					...requestOptions,
 					body : JSON.stringify({
 						name: form.title,
@@ -34,7 +34,7 @@ const playlistBaru = ({accessToken, userId, uris}) => {
 					}),
 				}
 
-				const responseCreatePlaylist = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, optionsCreatePlaylist)
+				const responseplaylistBaru = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, optionsplaylistBaru)
 				.then((data) => data.json());
 
 				const optionsAddMusic = {
@@ -44,9 +44,9 @@ const playlistBaru = ({accessToken, userId, uris}) => {
 					}),
 				}
 
-				await fetch(`https://api.spotify.com/v1/playlists/${responseCreatePlaylist.id}/tracks`, optionsAddMusic)
+				await fetch(`https://api.spotify.com/v1/playlists/${responseplaylistBaru.id}/tracks`, optionsAddMusic)
 				.then((data) => {
-					console.log(responseCreatePlaylist);
+					console.log(responseplaylistBaru);
 					data.json()});
 
 				setForm({title: '', description: ''});
@@ -59,7 +59,7 @@ const playlistBaru = ({accessToken, userId, uris}) => {
 		}
 	};
 
-	return <form onSubmit={handleCreatePlaylist}>
+	return <form onSubmit={handleplaylistBaru}>
 		<label htmlFor="title">Title</label>
 		<br />
 		<input 
@@ -86,4 +86,4 @@ const playlistBaru = ({accessToken, userId, uris}) => {
 	</form>
 }
 
-export default playlistBaru;
+export default PlaylistBaru;

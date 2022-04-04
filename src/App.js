@@ -6,7 +6,7 @@ import IsiTrack from "./components/track/index";
 import url from "./components/helper/index";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import playlistBaru from './components/playlist';
+import PlaylistBaru from './components/playlist';
 
 function App() {
   const [token, setToken] = useState("");
@@ -92,52 +92,45 @@ function App() {
   return (
 
     <div className="main">
-      <header>
-       <div className="navbar">
-         <div className="logo">
-           <h1>App-tify</h1>
-         </div>
-         <div className="login">
-           {!isLogin && (<a
-         href={url}
-         className="loginan"
-       >
-         Login
-       </a>)}
-       <h1>Create Playlist</h1>
-         </div>
-       </div>
-       </header>
-    </div>
+    <header>
+      <div className="navbar">
+        <div className="logo">
+          <h1>App-tify</h1>
+        </div>
+        <div className="login">
+          {!isLogin && (<a href={url}>Login</a>)}
+        </div>
+      </div>
+      <h1>Create Playlist</h1>
+    </header>
     <main>
       <div className="playlist-content">
-      {isLogin && (<playlistBaru accessToken={token} userId={user.id} uris={selectedMusic}/>)}
+      {isLogin && (<PlaylistBaru accessToken={token} userId={user.id} uris={selectedTracks}/>)}
       </div>
-    </main>
-    // <main> 
-    //   <div className="inputan">
-    //   <input
-    //     type="search"
-    //     className="inptSrc"
-    //     placeholder="Search"
-    //     aria-label="Search"
-    //     onChange={(e) => setCariLagu(e.target.value)}
-    //   />
-    //   <button
-    //     className="btnInput"
-    //     type="button"
-    //     onClick={getSong}
-    //   >
-    //     Search
-    //   </button>
-    //   </div>
+       <div className="inputan">
+       <input
+         type="search"
+         className="inptSrc"
+         placeholder="Search"
+         aria-label="Search"
+         onChange={(e) => setCariLagu(e.target.value)}
+       />
+       <button
+         className="btnInput"
+         type="button"
+         onClick={getSong}
+       >
+         Search
+       </button>
+       </div>
       
-    //   <div className="deskripsi">
-    //     <div className="trackSong">
-    //       <div className="listSong">{callMusic}</div>
-    //     </div>
-    //   </div>
-    // </main>
+       <div className="deskripsi">
+         <div className="trackSong">
+           <div className="listSong">{callMusic}</div>
+         </div>
+         </div>
+         </main>
+       </div>
   );
 }
 
