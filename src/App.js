@@ -5,24 +5,28 @@ import IsiTrack from "./components/track/index";
 // import ButtonTrack from "./components/track/button/index";
 import url from "./components/helper/index";
 import { useEffect, useState } from "react";
+import {useSelector, useDispatch} from 'react-redux';
+import { setToken } from "./app/reduxSlice";
 import axios from "axios";
 import PlaylistBaru from './components/playlist';
 
 function App() {
-  const [token, setToken] = useState("");
   const [cariLagu, setCariLagu] = useState("");
   const [dataLagu, setdataLagu] = useState([]);
   const [selectedTracks, setSelectedTracks] = useState([]);
   const [gabungTracks, SetGabungTracks] = useState([]);
   const [user, setUser] = useState({});
   const [isLogin, setIsLogin] = useState(false);
+  const token = useSelector((state) => state.token);
+  const dispatch = useDispatch();
+  const [accToken, setAccToken] = useState('');
 
   useEffect(() => {
     const queryString = new URL(window.location.href.replace("#", "?")).searchParams;
     const accessToken = queryString.get("access_token");
-    setToken(accessToken);
+    setAccToken(accessToken);
     if(accessToken !== null){
-      setToken(accessToken);
+      setAccToken(accessToken);
       setIsLogin(accessToken !== null);
 
       const setProfile = async () =>{
@@ -42,14 +46,15 @@ function App() {
           alert(err)
         }   
       }
+      dispatch(setToken(accessToken));
       setProfile();
     }
-  }, []);
+  }, [dispatch]);
 
   const getSong = async () => {
     await axios
     .get(
-      `https://api.spotify.com/v1/search?q=${cariLagu}&type=track&access_token=${token}`
+      `https://api.spotify.com/v1/search?q=${cariLagu}&type=track&access_token=${accToken}`
     )
       .then((response) => setdataLagu(response.data.tracks.items))
       .catch((error) => {
@@ -105,7 +110,12 @@ function App() {
     </header>
     <main>
       <div className="playlist-content">
-      {isLogin && (<PlaylistBaru accessToken={token} userId={user.id} uris={selectedTracks}/>)}
+      {isLogin && (
+        <>
+        <PlaylistBaru accessToken={accToken} userId={user.id} uris={selectedTracks}/>
+        </>
+      
+      )}
       </div>
        <div className="inputan">
        <input
