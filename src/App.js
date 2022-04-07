@@ -9,6 +9,13 @@ import {useSelector, useDispatch} from 'react-redux';
 import { setToken } from "./app/reduxSlice";
 import axios from "axios";
 import PlaylistBaru from './components/playlist';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect
+}from "react-router-dom";
 
 function App() {
   const [cariLagu, setCariLagu] = useState("");
@@ -33,19 +40,21 @@ function App() {
         try{
           const requestOptions = {
             headers: {
-              'Authorization': 'Bearer ' + accessToken,
+              Authorization: 'Bearer ' + accessToken,
               'Content-Type': 'application/json',
             },
           };
           console.log(requestOptions);
 
-          const response = await fetch(`https://api.spotify.com/v1/me`, requestOptions).then(data => data.json());
+          const response = await fetch(
+            `https://api.spotify.com/v1/me`, 
+            requestOptions).then((data) => data.json());
           console.log(response);
           setUser(response);
         } catch(err) {
-          alert(err)
+          alert(err);
         }   
-      }
+      };
       dispatch(setToken(accessToken));
       setProfile();
     }
@@ -63,25 +72,25 @@ function App() {
   };
 
   const handleSelectedTrack = (uri) => {
-    const alreadySelected = selectedTracks.find(m => m === uri);
+    const alreadySelected = selectedTracks.find((m) => m === uri);
     if (alreadySelected){
-      setSelectedTracks(selectedTracks.filter((m) => m !== uri))
+      setSelectedTracks(selectedTracks.filter((m) => m !== uri));
     }else{
       setSelectedTracks([...selectedTracks, uri]);
     }
-    console.log(selectedTracks)
-  }
+    console.log(selectedTracks);
+  };
 
   useEffect(() =>{
     const gabungTracksWithSelectedTrack = dataLagu.map((songs) =>({
       ...songs,
-      isSelected: selectedTracks.find((m) => m === songs.uri) ? true :false,
+      isSelected: selectedTracks.find((m) => m === songs.uri) ? true :false
     }));
     SetGabungTracks(gabungTracksWithSelectedTrack);
     console.log(gabungTracksWithSelectedTrack);
   }, [selectedTracks, dataLagu]);
   
-  const callMusic = gabungTracks.map((music) => 
+  const callMusic = gabungTracks.map((music) => ( 
     <IsiTrack
       key={music.id}
       images={music.album.images[1].url}
@@ -92,10 +101,23 @@ function App() {
       uri={music.uri}
       isSelected={music.isSelected}
     />
-  );
+  ));
 
+  const PageLogin = () => {
+    return (
+      <div className="Loginpage">
+        <div className="logincontent">
+          <h1>Please Login</h1>
+          <a href="{url}">
+          <button>Login</button>
+          </a>
+        </div>
+      </div>
+    );
+  };
+
+  const PlaylistPage = () => {
   return (
-
     <div className="main">
     <header>
       <div className="navbar">
@@ -103,19 +125,27 @@ function App() {
           <h1>App-tify</h1>
         </div>
         <div className="login">
-          {!isLogin && (<a href={url}>Login</a>)}
+        {!isLogin ? (
+                <a href={url}>Login</a>
+              ) : (
+                <a href="http://localhost:3000/">Logout</a>
+              )}
         </div>
       </div>
       <h1>Create Playlist</h1>
     </header>
     <main>
       <div className="playlist-content">
-      {isLogin && (
+      {/* {isLogin && (
         <>
         <PlaylistBaru accessToken={accToken} userId={user.id} uris={selectedTracks}/>
         </>
-      
-      )}
+      )} */}
+      <PlaylistBaru
+        accessToken={accToken}
+        userId={user.id}
+        uris={selectedTracks}
+        />
       </div>
        <div className="inputan">
        <input
@@ -123,14 +153,14 @@ function App() {
          className="inptSrc"
          placeholder="Search"
          aria-label="Search"
-         onChange={(e) => setCariLagu(e.target.value)}
+         onChange={(e) => {
+           console.log(e.target.value);
+          setCariLagu(e.target.value)}}
        />
        <button
          className="btnInput"
          type="button"
-         onClick={getSong}
-       >
-         Search
+         onClick={getSong}>Search
        </button>
        </div>
       
@@ -142,7 +172,36 @@ function App() {
          </main>
        </div>
   );
-}
+};
 
+return (
+  <>
+    <Router>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Login</Link>
+            </li>
+            <li>
+              <Link to="/create-playlist">Create Playlist</Link>
+            </li>
+          </ul>
+        </nav>
+
+        <Switch>
+          <Route path="/create-playlist">
+            {isLogin ? <PlaylistPage /> : <Redirect to="/" />}
+          </Route>
+          <Route path="/">
+            <PageLogin />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  </>
+);
+}
 // const spotify_secret_key = process.env.REACT_APP_SPOTIFY_KEY;
 export default App;
+
