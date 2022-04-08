@@ -13,7 +13,7 @@ const PageLogin = () => {
             const setProfile = async () =>{
                 try{
                     const requestOptions = {
-                        headeres: {
+                        headers: {
                             'Authorization': 'Bearer ' + accessToken,
                             'Content-Type': 'application/json',
                         },
@@ -36,4 +36,4 @@ const PageLogin = () => {
     );
 }
 
-export default PageLogin;
+// export default PageLogin;
