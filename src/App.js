@@ -1,8 +1,5 @@
-// import logo from "./logo.svg";
 import "./App.css";
-// import data from "./data.js";
 import IsiTrack from "./components/track/index";
-// import ButtonTrack from "./components/track/button/index";
 import url from "./components/helper/index";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -138,11 +135,6 @@ function App() {
         </header>
         <main>
           <div className="playlist-content">
-            {/* {isLogin && (
-        <>
-        <PlaylistBaru accessToken={accToken} userId={user.id} uris={selectedTracks}/>
-        </>
-      )} */}
             <PlaylistBaru
               accessToken={accToken}
               userId={user.id}
@@ -200,5 +192,4 @@ function App() {
     </>
   );
 }
-// const spotify_secret_key = process.env.REACT_APP_SPOTIFY_KEY;
 export default App;
