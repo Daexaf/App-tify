@@ -61,7 +61,7 @@ function App() {
         <div className="logincontent">
           <h1>Please Login</h1>
           <a href={url}>
-            <button>Login</button>
+            <button className="tombol">Login</button>
           </a>
         </div>
       </div>
@@ -127,11 +127,11 @@ function App() {
               {!isLogin ? (
                 <a href={url}>Login</a>
               ) : (
-                <a href="http://localhost:3000/">Logout</a>
+                <a href="http://localhost:3000/" className="logout">Logout</a>
               )}
             </div>
           </div>
-          <h1>Create Playlist</h1>
+          <h1 className="judul">Create Playlist</h1>
         </header>
         <main>
           <div className="playlist-content">

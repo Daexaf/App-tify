@@ -56,6 +56,8 @@ button:hover {
   margin-bottom:20px;
   padding-top:20px;
   padding-bottom:10px;
+  border-radius:5px;
+  border:#b4bdc5 solid 2px;
 }
 
 .track:hover{
@@ -69,7 +71,8 @@ h1{
 .inputan{
   display: flex;
   justify-content: center;
-  /* flex-direction: column; */
+  margin:20px;
+  align-items: center;
 }
 
 .inptSrc{
@@ -85,9 +88,125 @@ h1{
   margin-left: 20px;
 }
 
-form{
-  color:white;
+.logincontent{
+  display: flex; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
+
+.logincontent .tombol{
+  float: left;
+  margin-left:50px;
+}
+
+nav, li, .navbar{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+nav a{
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  float: le;
+}
+
+nav a:hover{
+  color: #b4bdc5;
+}
+
+.login{
+  margin-top:20px;
+  font-size: 20px;
+}
+
+.login a{
+  text-decoration: none;
+  color: #fff;
+  margin:0 auto;
+}
+
+.login a:hover{
+  color: #b4bdc5;
+}
+
+form{
+  margin-left:50px;
+  color:#fff;
+}
+
+form input, textarea{
+  padding:10px;
+  margin-bottom:10px;
+}
+
+/* .Loginpage{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+  margin-left:300px;
+}
+
+.logincontent h1{
+  margin: 0 auto;
+  margin-bottom:10px;
+}
+
+.navibar li{
+  float: left;
+  margin-left:30px;
+  margin-top:20px;
+  list-style-type: none;
+  color:#fff;
+}
+
+.navibar li a{
+  text-decoration: none;
+  display: inline;
+  color: #fff;
+}
+
+.topbar{
+  display: inline-block;
+}
+
+.navbar .logo{
+  display: inline-block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.navbar{
+  width: 100%;
+  margin-top: 30px;
+  float:left;
+}
+
+.logo h1{
+  float:left;
+}
+
+.playlist-content{
+  display: flex;
+  margin-left:50px;
+  margin-top: 20px;
+} */
+
+/* .login{
+  margin-left: 50px;
+}
+
+.login a{
+  text-decoration: none;
+  color: #fff;
+} */
+
 
 @keyframes App-logo-spin {
   from {
