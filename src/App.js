@@ -13,6 +13,20 @@ import {
   Link,
   Redirect,
 } from "react-router-dom";
+import {
+  Button,
+  ButtonGroup,
+  Grid,
+  Heading,
+  Flex,
+  Spacer,
+  Box,
+  Center,
+  Square,
+  Circle,
+  Input,
+  Textarea,
+} from "@chakra-ui/react";
 
 function App() {
   const [user, setUser] = useState({});
@@ -59,10 +73,15 @@ function App() {
     return (
       <div className="Loginpage">
         <div className="logincontent">
-          <h1>Please Login</h1>
-          <a href={url}>
-            <button className="tombol">Login</button>
-          </a>
+          {isLogin ? (
+            <Center bg="gray.500" h="30px" color="white" mt="5px">
+              Selamat Datang, silahkan buat playlist
+            </Center>
+          ) : (
+            <Center bg="gray.500" h="30px" color="white" mt="10px">
+              Silahkan Login
+            </Center>
+          )}
         </div>
       </div>
     );
@@ -72,7 +91,7 @@ function App() {
     const [dataLagu, setdataLagu] = useState([]);
     const [selectedTracks, setSelectedTracks] = useState([]);
     const [gabungTracks, SetGabungTracks] = useState([]);
-    
+
     const [cariLagu, setCariLagu] = useState("");
     const getSong = async () => {
       await axios
@@ -118,10 +137,10 @@ function App() {
     ));
     return (
       <div className="main">
-        <header>
+        {/* <header>
           <div className="navbar">
             <div className="logo">
-              <h1>App-tify</h1>
+              <Heading>App-tify</Heading>
             </div>
             <div className="login">
               {!isLogin ? (
@@ -132,7 +151,7 @@ function App() {
             </div>
           </div>
           <h1 className="judul">Create Playlist</h1>
-        </header>
+        </header> */}
         <main>
           <div className="playlist-content">
             <PlaylistBaru
@@ -142,21 +161,52 @@ function App() {
             />
           </div>
           <div className="inputan">
-            <input
+            <Center>
+              <Input
+                placeholder="Basic usage"
+                htmlSize={10}
+                width="auto"
+                mr="10"
+                onChange={(e) => setCariLagu(e.target.value)}
+              />
+            </Center>
+            {/* <input
               type="search"
               className="inptSrc"
               placeholder="Search"
               aria-label="Search"
               onChange={(e) => setCariLagu(e.target.value)}
-            />
-            <button className="btnInput" type="button" onClick={getSong}>
-              Search
-            </button>
+            /> */}
+            <Center>
+              {/* <button className="btnInput" type="button" onClick={getSong}>
+                Search
+              </button> */}
+              <Button
+                // rightIcon={<ArrowForwardIcon />}
+                colorScheme="teal"
+                variant="outline"
+                onClick={getSong}
+                mr="45px"
+                mt="10px"
+              >
+                Search
+              </Button>
+            </Center>
           </div>
 
           <div className="deskripsi">
             <div className="trackSong">
-              <div className="listSong">{callMusic}</div>
+              <div className="listSong">
+                <Grid
+                  templateColumns="repeat(4, 1fr)"
+                  gap={2}
+                  mt="10"
+                  ml="10"
+                  mr="10"
+                >
+                  {callMusic}
+                </Grid>
+              </div>
             </div>
           </div>
         </main>
@@ -168,7 +218,7 @@ function App() {
     <>
       <Router>
         <div>
-          <nav>
+          {/* <nav>
             <ul>
               <li>
                 <Link to="/">Login</Link>
@@ -177,7 +227,30 @@ function App() {
                 <Link to="/create-playlist">Create Playlist</Link>
               </li>
             </ul>
-          </nav>
+          </nav> */}
+          <Flex>
+            <Box p="2">
+              <Heading size="md">App-tify</Heading>
+            </Box>
+            <Spacer />
+            <Box>
+              {!isLogin ? (
+                <Button colorScheme="teal" mr="4" mt="4">
+                  <a href={url}>Login</a>
+                </Button>
+              ) : (
+                <Button colorScheme="teal" mr="4" mt="4">
+                  <a href="http://localhost:3000/" className="logout">
+                    Logout
+                  </a>
+                </Button>
+              )}
+
+              <Button colorScheme="teal" mt="4">
+                <Link to="/create-playlist">Create Playlist</Link>
+              </Button>
+            </Box>
+          </Flex>
 
           <Switch>
             <Route path="/create-playlist">

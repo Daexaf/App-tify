@@ -1,4 +1,4 @@
-html {
+/* html {
   height: 100%;
   background: rgb(151, 56, 140);
   background: linear-gradient(
@@ -101,11 +101,20 @@ h1{
   margin-left:50px;
 }
 
-nav, li, .navbar{
+ul, .navbar{
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-direction: row;
+  overflow: hidden;
+}
+
+nav{
+  width: 100%;
+}
+
+li{
+  list-style: none;
 }
 
 nav a{
@@ -208,11 +217,11 @@ form input, textarea{
 } */
 
 
-@keyframes App-logo-spin {
+/* @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
   }
-}
+} */
