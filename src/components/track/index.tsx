@@ -14,10 +14,10 @@ interface MusicProperty {
 const IsiTrack = (props: MusicProperty) => {
   return (
     <div className="track">
-      <img src={props.images} alt="images album" />
-      <h3>Title: {props.title}</h3>
-      <p>Artist: {props.artist}</p>
-      <p>Albums: {props.album}</p>
+      <img src={props.images} alt="images album" data-testid="img-preview" />
+      <h3 data-testid="title">Title: {props.title}</h3>
+      <p data-testid="artist">Artist: {props.artist}</p>
+      <p data-testid="album">Albums: {props.album}</p>
       {/* <button type="submit" id="play">Select</button> */}
       <Button
         colorScheme="blue"
