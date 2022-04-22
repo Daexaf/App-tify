@@ -34,10 +34,7 @@ function App() {
                 </Button>
               ) : (
                 <Button colorScheme="blue" mr="4" mt="4">
-                  {/* <a href="https://app-tify.vercel.app/" className="logout">
-                    Logout
-                  </a> */}
-                  <a href="http://localhost:3000" className="logout">
+                  <a href="https://app-tify.vercel.app/" className="logout">
                     Logout
                   </a>
                 </Button>
