@@ -107,6 +107,7 @@ const PlaylistPage = () => {
             uris={selectedTracks}
           />
         </div>
+
         <div className="inputan">
           <Center>
             <Input
@@ -114,7 +115,7 @@ const PlaylistPage = () => {
               htmlSize={10}
               width="auto"
               mr="10px"
-              mt="10px"
+              mt="20px"
               ml="30px"
               color="white"
               onChange={(e) => setCariLagu(e.target.value)}
@@ -126,8 +127,9 @@ const PlaylistPage = () => {
               colorScheme="blue"
               onClick={getSong}
               mr="45px"
-              mt="10px"
+              mt="20px"
               ml="60px"
+              mb="20px"
             >
               Search
             </Button>

@@ -1,5 +1,6 @@
 var id_client = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
-var redirect_uri = "https://app-tify.vercel.app/";
+// var redirect_uri = "https://app-tify.vercel.app/";
+var redirect_uri = "http://localhost:3000";
 
 var state = "ApptifyIhsan";
 

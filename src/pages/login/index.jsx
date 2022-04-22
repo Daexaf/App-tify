@@ -1,14 +1,15 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setToken } from "../../app/reduxSlice";
-import url from "../../components/helper/index";
 import { useState } from "react";
 import { Center } from "@chakra-ui/react";
 
 const PageLogin = () => {
   const dispatch = useDispatch();
+  // eslint-disable-next-line no-unused-vars
   const [user, setUser] = useState({});
   const [isLogin, setIsLogin] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [accToken, setAccToken] = useState("");
 
   useEffect(() => {
@@ -55,11 +56,11 @@ const PageLogin = () => {
     <div className="Loginpage">
       <div className="logincontent">
         {isLogin ? (
-          <Center bg="gray.500" h="30px" color="white" mt="5px">
+          <Center bg="#8FAFC5" h="50px" color="white" mt="px">
             Selamat Datang, silahkan buat playlist
           </Center>
         ) : (
-          <Center bg="gray.500" h="30px" color="white" mt="10px">
+          <Center bg="#8FAFC5" h="50px" color="white" mt="px">
             Silahkan Login
           </Center>
         )}

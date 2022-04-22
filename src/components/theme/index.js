@@ -8,15 +8,20 @@ const theme = extendTheme({
     global: {
       // styles for the `body`
       body: {
-        bgGradient: "linear(to-r, green.200, pink.500)",
+        // bgGradient: "linear(to-r, red.500, black)",
+        bg: "#346A87",
         color: "white",
+        backgroundRepeat: "no-repeat",
       },
       // styles for the `a`
       a: {
-        color: "gray.100",
+        color: "white",
         _hover: {
           textDecoration: "underline",
         },
+        // Heading: {
+        // ,
+        // },
       },
     },
   },

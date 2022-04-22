@@ -50,7 +50,7 @@ button:hover {
   width:100%;
   margin: 0;
   justify-content: space-around;
-  border: 2px solid black;
+  border: 2px solid #8FAFC5;
   border-radius: 5px;
   margin-top: 10px;
 }
@@ -58,14 +58,28 @@ button:hover {
 .track{
   width:90%;
   margin-bottom:20px;
-  padding-top:0px;
+  padding-top:px;
   padding-bottom:10px;
   border-radius:5px;
   border:#b4bdc5 solid 2px;
+  background-color: #8FAFC5;
+  margin-top: 20px;
 }
 
 .track:hover{
   background-color: rgba(196, 179, 179, 0.5);
+}
+
+span{
+  color: #b4bdc5;
+}
+
+.css-9rc8l5, .css-bk9fzy, .css-18j379d, .css-sxvipb{
+  color:white;
+}
+
+img{
+  margin-bottom: 15px;
 }
 
 /*h1{

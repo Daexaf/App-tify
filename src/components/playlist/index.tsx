@@ -16,7 +16,7 @@ const PlaylistBaru = ({ accessToken, userId, uris }: any) => {
   const handleplaylistBaru = async (e: any) => {
     e.preventDefault();
 
-    if (form.title.length > 5) {
+    if (form.title.length > 10) {
       try {
         const requestOptions = {
           method: "POST",

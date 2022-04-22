@@ -1,4 +1,3 @@
-// import ButtonTrack from "./button/index";
 import { Button } from "@chakra-ui/react";
 
 interface MusicProperty {
@@ -18,7 +17,6 @@ const IsiTrack = (props: MusicProperty) => {
       <h3 data-testid="title">Title: {props.title}</h3>
       <p data-testid="artist">Artist: {props.artist}</p>
       <p data-testid="album">Albums: {props.album}</p>
-      {/* <button type="submit" id="play">Select</button> */}
       <Button
         colorScheme="blue"
         mt="10px"
