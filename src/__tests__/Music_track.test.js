@@ -8,10 +8,12 @@ test("rendering track component", () => {
   const title = screen.getByTestId("title");
   const album = screen.getByTestId("album");
   const artist = screen.getByTestId("artist");
+  const duration = screen.getByTestId("duration");
 
   // expect(screen.getByText('Track')).toBeInTheDocument();
   expect(images).toBeInTheDocument();
   expect(title).toBeInTheDocument();
   expect(album).toBeInTheDocument();
   expect(artist).toBeInTheDocument();
+  expect(duration).toBeInTheDocument();
 });

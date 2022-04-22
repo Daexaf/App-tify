@@ -14,20 +14,21 @@ interface PropertyData {
     name: string;
   };
   name: string;
+  duration_ms: number;
   artists: [{ name: string }];
   isSelected: isSelected;
 }
 
-interface usrType {
-  token: {
-    token: {
-      access_token: string;
-      user: {
-        id: string;
-      };
-    };
-  };
-}
+// interface usrType {
+//   token: {
+//     token: {
+//       access_token: string;
+//       user: {
+//         id: string;
+//       };
+//     };
+//   };
+// }
 
 type isSelected = boolean;
 
@@ -38,12 +39,10 @@ export interface SelectedSongType {
 const PlaylistPage = () => {
   const [accToken, setAccToken] = useState("");
   const [dataLagu, setdataLagu] = useState<PropertyData[]>([]);
-  const [selectedTracks, setSelectedTracks] = useState<
-    SelectedSongType["uri"][]
-  >([]);
+  const [pilihTracks, setPilihTracks] = useState<SelectedSongType["uri"][]>([]);
   const [gabungTracks, SetGabungTracks] = useState<PropertyData[]>([]);
   const [cariLagu, setCariLagu] = useState("");
-  const [user, setUser] = useState<any>({} as usrType);
+  const [user, setUser] = useState<any>({});
   const accessToken = useAppSelector(
     (state: any) => state.token.token.accessToken
   );
@@ -66,36 +65,48 @@ const PlaylistPage = () => {
   };
 
   const handleSelectedTrack = (uri: string) => {
-    const alreadySelected = selectedTracks.find((m) => m === uri);
+    const alreadySelected = pilihTracks.find((m) => m === uri);
     if (alreadySelected) {
-      setSelectedTracks(selectedTracks.filter((m) => m !== uri));
+      setPilihTracks(pilihTracks.filter((m) => m !== uri));
     } else {
-      setSelectedTracks([...selectedTracks, uri]);
+      setPilihTracks([...pilihTracks, uri]);
     }
-    console.log(selectedTracks);
+    console.log(pilihTracks);
   };
 
   useEffect(() => {
     const gabungTracksWithSelectedTrack = dataLagu.map((songs) => ({
       ...songs,
-      isSelected: selectedTracks.find((m) => m === songs.uri) ? true : false,
+      isSelected: pilihTracks.find((m) => m === songs.uri) ? true : false,
     }));
     SetGabungTracks(gabungTracksWithSelectedTrack);
     console.log(gabungTracksWithSelectedTrack);
-  }, [selectedTracks, dataLagu]);
+  }, [pilihTracks, dataLagu]);
 
-  const callMusic = gabungTracks.map((music) => (
-    <IsiTrack
-      key={music.id}
-      images={music.album.images[1].url}
-      title={music.name}
-      artist={music.artists[0].name}
-      album={music.album.name}
-      onSelectMusic={handleSelectedTrack}
-      uri={music.uri}
-      isSelected={music.isSelected}
-    />
-  ));
+  const callMusic = gabungTracks.map((music) => {
+    const ubahdurasi = () => {
+      let ms: number = music.duration_ms;
+      const menit = Math.floor((ms / 1000 / 60) << 0);
+      const detik = Math.floor((ms / 1000) % 60);
+      return ubahDigit(menit) + ":" + ubahDigit(detik);
+    };
+    const ubahDigit = (num: number) => {
+      return num.toString().padStart(2, "0");
+    };
+    return (
+      <IsiTrack
+        key={music.id}
+        images={music.album.images[1].url}
+        title={music.name}
+        artist={music.artists[0].name}
+        album={music.album.name}
+        duration={ubahdurasi()}
+        onSelectMusic={handleSelectedTrack}
+        uri={music.uri}
+        isSelected={music.isSelected}
+      />
+    );
+  });
 
   return (
     <div className="main">
@@ -104,7 +115,7 @@ const PlaylistPage = () => {
           <PlaylistBaru
             accessToken={accToken}
             userId={user.id}
-            uris={selectedTracks}
+            uris={pilihTracks}
           />
         </div>
 

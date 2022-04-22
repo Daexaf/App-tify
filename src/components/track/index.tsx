@@ -5,6 +5,7 @@ interface MusicProperty {
   title: string;
   artist: string;
   album: string;
+  duration: string;
   onSelectMusic: (uri: string) => void;
   uri: string;
   isSelected: boolean;
@@ -17,6 +18,7 @@ const IsiTrack = (props: MusicProperty) => {
       <h3 data-testid="title">Title: {props.title}</h3>
       <p data-testid="artist">Artist: {props.artist}</p>
       <p data-testid="album">Albums: {props.album}</p>
+      <p data-testid="duration">Duration: {props.duration}</p>
       <Button
         colorScheme="blue"
         mt="10px"
